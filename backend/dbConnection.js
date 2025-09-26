@@ -1,18 +1,16 @@
 const mongoose = require("mongoose");
-require("dotenv").config();
+require("dotenv").config(); // Load .env variables
 
-const PASSWORD = process.env.PASSWORD;
-
-const uri = `mongodb+srv://as73881:${PASSWORD}@cluster0.8q4vi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = process.env.MONGODB_URI;
 
 function dbConnection() {
   mongoose
     .connect(uri)
-    .then((response) => {
-      console.log("DB CONNECT SUCCESS");
+    .then(() => {
+      console.log("DB CONNECTED SUCCESSFULLY");
     })
     .catch((err) => {
-      console.log(err);
+      console.error("DB CONNECTION FAILED:", err);
     });
 }
 
